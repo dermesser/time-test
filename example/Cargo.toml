@@ -4,4 +4,4 @@ version = "0.1.0"
 authors = ["Lewin Bormann <lewin@lewin-bormann.info>"]
 
 [dependencies]
-time_test = { path = "../" }
+time-test = { path = "../" }

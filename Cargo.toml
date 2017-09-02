@@ -1,7 +1,11 @@
 [package]
-name = "time_test"
+name = "time-test"
 version = "0.1.0"
 authors = ["Lewin Bormann <lewin@lewin-bormann.info>"]
+license = "MIT"
+description = "Measure how long your test cases take with one simple macro."
+repository = "https://bitbucket.org/dermesser/time_test"
+documentation = "https://docs.rs/time-test"
 
 [dependencies]
 time = "0.1"
