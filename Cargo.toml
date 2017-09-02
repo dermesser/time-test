@@ -1,6 +1,6 @@
 [package]
 name = "time-test"
-version = "0.1.0"
+version = "0.2.0"
 authors = ["Lewin Bormann <lewin@lewin-bormann.info>"]
 license = "MIT"
 description = "Measure how long your test cases take with one simple macro."
