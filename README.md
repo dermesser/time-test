@@ -15,7 +15,11 @@ mod tests {
         time_test!();
 
         println!("hello world");
-        assert!(true);
+
+        {
+            time_test!("sub-assert 1");
+            assert!(true);
+        }
         assert_eq!(1, 1);
     }
 }
@@ -33,6 +37,6 @@ $ cargo test -- --test-threads=1
      Running target/debug/deps/example-a84426a5de188514
 
 running 1 test
-test example::tests::my_test ... (took PT0.000004178S) ok
+test example::tests::my_test ... (sub-assert 1 took PT0.000002421S) (took PT0.000004178S) ok
 ```
 
