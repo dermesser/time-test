@@ -41,7 +41,7 @@
 
 use std::io::{self, Write};
 
-extern crate time;
+use time;
 
 /// TestTimer allows to easily time tests. It's recommended to use the time_test!() macro instead
 /// of invoking this type directly.
@@ -57,9 +57,9 @@ impl Drop for TestTimer {
     fn drop(&mut self) {
         let dur = time::get_time() - self.0;
         if self.1.is_empty() {
-            write!(io::stderr(), "(took {}) ", dur).is_ok();
+            write!(io::stderr(), "(took {}) ", dur).unwrap_or(());
         } else {
-            write!(io::stderr(), "({} took {}) ", self.1, dur).is_ok();
+            write!(io::stderr(), "({} took {}) ", self.1, dur).unwrap_or(());
         }
     }
 }

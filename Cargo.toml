@@ -6,6 +6,7 @@ license = "MIT"
 description = "Measure how long your test cases take with one simple macro."
 repository = "https://bitbucket.org/dermesser/time_test"
 documentation = "https://docs.rs/time-test"
+edition = "2018"
 
 [dependencies]
 time = "0.1"
