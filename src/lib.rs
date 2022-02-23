@@ -2,9 +2,8 @@
 //! your tests took to run. Using it is simple (see `example/` for an example use
 //! case):
 //!
-//! ```rust
-//! #[macro_use]
-//! extern crate time_test;
+//! ```
+//! #[macro_use] extern crate time_test;
 //!
 //! #[cfg(test)]
 //! mod tests {
@@ -27,7 +26,7 @@
 //! measure the test duration will result in the duration that the test has taken
 //! being shown in the test result line:
 //!
-//! ```
+//! ```bash
 //! $ # 1 test thread so that the output is not garbled.
 //! $ cargo test -- --test-threads=1
 //!
