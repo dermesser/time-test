@@ -37,28 +37,30 @@
 //! test example::tests::my_test ... (sub-assert 1 took PT0.000002421S) (took PT0.000004178S) ok
 //! ```
 
-
 use std::io::{self, Write};
 
-use time;
+use std::time::Instant;
 
 /// TestTimer allows to easily time tests. It's recommended to use the time_test!() macro instead
 /// of invoking this type directly.
-pub struct TestTimer(time::Timespec, String);
+pub struct TestTimer(Instant, String);
 
 impl TestTimer {
     pub fn new(desc: String) -> TestTimer {
-        TestTimer(time::get_time(), desc)
+        TestTimer(Instant::now(), desc)
     }
 }
 
 impl Drop for TestTimer {
     fn drop(&mut self) {
-        let dur = time::get_time() - self.0;
+        let dur = Instant::now()
+            .checked_duration_since(self.0)
+            .unwrap_or_default();
+        let millis = (dur.as_nanos() as f64) / 1_000_000.0;
         if self.1.is_empty() {
-            write!(io::stderr(), "(took {}) ", dur).unwrap_or(());
+            write!(io::stderr(), "(took {} ms) ", millis).unwrap_or(());
         } else {
-            write!(io::stderr(), "({} took {}) ", self.1, dur).unwrap_or(());
+            write!(io::stderr(), "({} took {} ms) ", self.1, millis).unwrap_or(());
         }
     }
 }
@@ -72,5 +74,15 @@ macro_rules! time_test {
     ($desc:expr) => {
         use time_test::TestTimer;
         let _tt = TestTimer::new($desc.to_string());
+    };
+}
+
+#[cfg(test)]
+mod tests {
+    use crate as time_test;
+    #[test]
+    fn test_time_test() {
+        time_test!();
+        assert!(true);
     }
 }
